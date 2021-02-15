@@ -1,0 +1,40 @@
+nano -w /etc/yum.repos.d/dag.repo
+
+Insert
+<pre>
+[dag]
+name=Dag RPM Repository for Red Hat Enterprise Linux
+baseurl=http://apt.sw.be/redhat/el$releasever/en/$basearch/dag
+gpgcheck=1
+enabled=1
+</pre>
+
+do yum update if you want or do following:
+
+  yum search ffmpeg
+  yum install ffmpeg
+
+if you get an error of following sort:
+
+<pre>
+Public key for imlib2-1.2.2-1.el5.rf.i386.rpm is not installed
+[root@localhost home]#
+</pre>
+
+Then you will need to do following:
+
+<pre>
+rpm -Uhv http://apt.sw.be/redhat/el5/en/x86_64/rpmforge/RPMS//rpmforge-release-0.3.6-1.el5.rf.x86_64.rpm
+</pre>
+
+This will set up the rpmforge repos on that vps / server.  Then you will be able to do the yum install ffmpeg*
+
+Note:  You should install the ffmpeg source files too as these will be used to compile php-ffmpeg
+
+Next
+----
+Download ffmpeg-php from http://ffmpeg-php.sourceforge.net/
+
+Use the instructions there to compile the ffmpeg.so binary which then you will need to put in your php.ini as per the instructions there.
+
+restart apache and way she goes.
